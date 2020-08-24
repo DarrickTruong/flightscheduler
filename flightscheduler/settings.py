@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.flights',
+    'apps.flights.apps.SchedulerConfig',
     'rest_framework',
 ]
 

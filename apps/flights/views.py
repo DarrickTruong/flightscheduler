@@ -1,7 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from rest_framework import viewsets
+from apps.flights.models import Schedule
+from apps.flights.serializers import UserSerializer, ScheduleSerializer
+from rest_framework import viewsets, status
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return HttpResponse("this is the equivalent of @app.route('/')!")
@@ -9,3 +13,26 @@ def index(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+# APIs
+# /flights/
+
+@csrf_exempt
+def flight_list(request):
+    # Get All
+    if request.method == "GET":
+        schedules = Schedule.object.all()
+        schedules_serializer = ScheduleSerializer(schedules, many = True)
+        return JsonResponse(schedules_serializer.data, safe = False)
+    # Add One
+    if request.method == "POST":
+        schedule_data = JSONParser().parser(request)
+        schedule_serializer = ScheduleSerializer(data=schedule_data)
+        if schedule_serializer.is_valid():
+            schedule_serializer.save()
+            return JsonResponse(schedule_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(schedule_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    # Delete All
+    if request.method == "DELETE":
+        Schedule.objects.all().delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
