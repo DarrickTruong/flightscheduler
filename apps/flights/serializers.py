@@ -7,11 +7,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ('url', 'username', 'email')
 
-class Schedule(serializers.HyperlinkedModelSerializer):
+class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Schedule
         fields = (
-            'airlines',
+            'airline',
             'flight_no',
             'trip_type',
             'departure_airport',
