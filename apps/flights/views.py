@@ -26,7 +26,7 @@ def flight_list(request):
         return JsonResponse(schedules_serializer.data, safe = False)
     # Add One
     if request.method == "POST":
-        schedule_data = JSONParser.parse(request)
+        schedule_data = JSONParser().parse(request)
         schedule_serializer = ScheduleSerializer(data=schedule_data)
         if schedule_serializer.is_valid():
             schedule_serializer.save()

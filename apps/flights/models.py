@@ -10,3 +10,4 @@ class Schedule(models.Model):
     arrival_airport = models.CharField(max_length=10)
     departure_date = models.DateField()
     return_date = models.DateField()
+    

@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Schedule',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')),
                 ('airline', models.CharField(max_length=50)),
                 ('flight_no', models.CharField(max_length=10)),
                 ('trip_type', models.CharField(max_length=50)),

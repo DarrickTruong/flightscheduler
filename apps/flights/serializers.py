@@ -11,6 +11,7 @@ class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Schedule
         fields = (
+            'id',
             'airline',
             'flight_no',
             'trip_type',
