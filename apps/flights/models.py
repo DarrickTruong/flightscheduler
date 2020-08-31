@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
 class Schedule(models.Model):
     airline = models.CharField(max_length=50)
     flight_no = models.CharField(max_length=10)
